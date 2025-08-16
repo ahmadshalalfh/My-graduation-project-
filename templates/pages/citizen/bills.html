@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+
+<title>عرض الفواتير</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  .invoice-img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+</style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+<div class="container">
+  <h1>فواتير</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>رقم الفاتورة</th>
+        <th>التاريخ</th>
+        <th>المبلغ</th>
+        <th> حالة الفاتورة</th>
+        <th>الدفعات</th>
+        <th>الفاتورة</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for bill , bill_image in data  %}
+      <tr>
+        <td>{{ bill.BillID }}</td>
+        <td>{{ bill.DueDate }}</td>
+        <td>${{ bill.Amount }}</td>
+        {% if bill.paid %}
+        <td>مدفوع</td>
+        {% else %}
+        <td>غير مدفوع</td>
+        {% endif %}
+        <td><a href="{% url 'payments_bill' bill.BillID %}"> الدفعات</a> </td>
+        <td>
+            
+            <a href="data:image/png;base64,{{ bill_image }}" alt="فاتورة {{ bill.BillID }}" class="invoice-img" download="الفاتورة">  
+                <img src="data:image/png;base64,{{ bill_image }}" alt="فاتورة {{ bill.BillID }}" class="invoice-img">
+            </a>
+            
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+
+<title>إدخال التفاصيل</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        width: 80%;
+        max-width: 600px;
+        margin: 50px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 40px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: lighter;
+        margin-bottom: 5px;
+        text-align: right;
+    }
+
+    .form-group input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .form-group input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .btn {
+        background-color: #3c9af1;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .btn:hover {
+        background-color: #3c9af1;
+    }
+</style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+
+<div class="container">
+    <h2>إدخال الوثائق المطلوبه </h2>
+    <form  method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+            <strong>{% if message.tags == 'success' %}Success!{% elif message.tags == 'error' %}Error!{% endif %}</strong> {{ message }}
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            <label for="details">ملاحظات : </label>
+            <input type="text" id="details" name="details" placeholder="ادخل ملاحظاتك.." >
+        </div>
+        <div class="form-group">
+            <label for="id_image">صورة الهوية:</label>
+            <input type="file" id="id_image" name="id_image" accept="image/*" required>
+        </div>
+        {% if num1 == 1 %}
+        <div class="form-group">
+            <label for="id_image">صورة رخصة البناء :</label>
+            <input type="file" id="id_image" name="build_image" accept="image/*" required>
+        </div>
+        {% elif num1 == 2 or num1 == 3%}
+        <div class="form-group">
+            <label for="id_image">صورة الاشتراك القديم :</label>
+            <input type="file" id="id_image" name="oldsup_image" accept="image/*" required>
+        </div>
+        {%endif%}
+       
+        <button type="submit" class="btn">إرسال</button>
+    </form>
+</div>
+
+</body>
+</html>

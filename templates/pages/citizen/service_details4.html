@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarqumia Municipality | بلدية ترقوميا </title>
+    <link rel="icon" type="icon" href="logo.png">
+    <script src="https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'servicedetails.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'parts/navbar.html' %}
+    <section id="content-body">
+        <div class="head-container">
+            <div class="marker">
+                <span><a href="#">الصفحة الرئيسية</a></span>
+                <span><i class="fa-solid fa-chevron-left"></i></span>
+                <span><a href="#">عرض جميع الخدمات</a></span>
+                <span><i class="fa-solid fa-chevron-left"></i></span>
+                <span><a href="#">تفاصيل الخدمة</a></span>
+            </div>
+        </div>
+
+        <div class="services-title">
+            {% if num1 == 1 %}
+            <h2>  الابلاغ عن عطل معين في عداد الكهرباء </h2>
+            <p>تمكّنك هذه الخدمة من تصديق شهادة موثوقة ونافذة الصلاحيّة وصادرة عن جهة تقييم مطابقة مُعتمدة لمواد البناء
+                بشكل أساسي وغيرها من المواد، حيث تشمل هذه الخدمة المنتجات غير الإلزامية التي لا يغطيها أي تشريع أو
+                مُنتجات إلزامية لم يتم تطوير وإعداد متطلبات منح شهادات مطابقة لها.</p>
+            {% elif num1 == 2 %}
+            <h2>   الابلاغ عن عطل معين في عداد المياة </h2>
+            <p>تمكّنك هذه الخدمة من تصديق شهادة موثوقة ونافذة الصلاحيّة وصادرة عن جهة تقييم مطابقة مُعتمدة لمواد البناء
+                بشكل أساسي وغيرها من المواد، حيث تشمل هذه الخدمة المنتجات غير الإلزامية التي لا يغطيها أي تشريع أو
+                مُنتجات إلزامية لم يتم تطوير وإعداد متطلبات منح شهادات مطابقة لها.</p>
+            
+            {% endif %}
+        </div>
+
+        <div class="page-container">
+            <div class="content" id="content">
+            </div>
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="#" data-target="steps" data-service="{{ num1 }}">إجراءات وخطوات الخدمة</a>
+                        <i class="fa-solid fa-square-plus"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="documents" data-service="{{ num1 }}">الوثائق المطلوبة</a>
+                        <i class="fa-regular fa-file-lines"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="fees" data-service="{{ num1 }}">رسوم الخدمة</a>
+                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="time" data-service="{{ num1 }}">الوقت اللازم لانجاز الخدمة</a>
+                        <i class="fa-regular fa-clock"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button">
+            <a href="{% url 'complaints' num1 %}">تقديم الطلب</a>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // محتويات مختلفة لكل خدمة
+            const contentData = {
+                1: {
+                    steps: '<h3>إجراءات وخطوات الخدمة</h3><p>تفاصيل إجراءات وخطوات الخدمة لإشتراك كهرباء جديد.</p>',
+                    documents: '<h3>الوثائق المطلوبة</h3><p>تفاصيل الوثائق المطلوبة لإشتراك كهرباء جديد.</p>',
+                    fees: '<h3>رسوم الخدمة</h3><p>تفاصيل رسوم الخدمة لإشتراك كهرباء جديد.</p>',
+                    time: '<h3>الوقت اللازم لإنجاز الخدمة</h3><p>تفاصيل الوقت اللازم لإنجاز الخدمة لإشتراك كهرباء جديد.</p>'
+                },
+                2: {
+                    steps: '<h3>إجراءات وخطوات الخدمة</h3><p>تفاصيل إجراءات وخطوات الخدمة لفصل اشتراك عداد كهرباء.</p>',
+                    documents: '<h3>الوثائق المطلوبة</h3><p>تفاصيل الوثائق المطلوبة لفصل اشتراك عداد كهرباء.</p>',
+                    fees: '<h3>رسوم الخدمة</h3><p>تفاصيل رسوم الخدمة لفصل اشتراك عداد كهرباء.</p>',
+                    time: '<h3>الوقت اللازم لإنجاز الخدمة</h3><p>تفاصيل الوقت اللازم لإنجاز الخدمة لفصل اشتراك عداد كهرباء.</p>'
+                },
+               
+            };
+
+            // Function to handle link click
+            function handleLinkClick(event) {
+                event.preventDefault();
+                const content = document.getElementById('content');
+                const target = event.target.getAttribute('data-target');
+                const service = event.target.getAttribute('data-service');
+
+                // Update content based on the link clicked and service type
+                content.innerHTML = contentData[service][target];
+            }
+
+            // Attach click event listener to all sidebar links
+            const sidebarLinks = document.querySelectorAll('.sidebar ul li a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', handleLinkClick);
+            });
+        });
+    </script>
+</body>
+
+</html>

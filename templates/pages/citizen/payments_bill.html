@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+
+<title>الدفعات</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  .invoice-img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+</style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+<div class="container">
+  <h1>الدفعات </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>رقم الدفعه</th>
+        <th> تاريخ الدفع</th>
+        <th>المبلغ</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in payments  %}
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ payment.PaymentDate }}</td>
+        <td>${{ payment.AmountPaid }}</td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

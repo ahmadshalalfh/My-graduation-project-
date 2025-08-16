@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarqumia Municipality</title>
+  <link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{%static 'news_announcements.css'%}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+</head>
+
+<body>
+
+  
+    {% include 'parts/navbar.html'%}
+  
+  <section id="content-body">
+    <div class="news-announcments-title">
+      <h2>نشر الإعلانات</h2>
+      <p> نشر الأخبار والإعلانات لجعل المواطنين على إطلاع دائم بآخر أخبار بلدية ترقوميا والإعلانات المُتعلقة بالبلدة.
+      </p>
+    </div>
+  
+    <div class="container">
+      <h2>نشر إعلان جديد</h2>
+      <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+          <legend>تفاصيل الإعلان</legend>
+          <label for="newstitle">عنوان الإعلان</label>
+          <input type="text" id="newstitle" name="newstitle" required placeholder="أدخل عنواناً للإعلان">
+          <label for="newscontent">محتوى الإعلان</label>
+          <input type="text" id="newscontent" name="newscontent" required placeholder="أكتب محتوى الإعلان الخاص بك">
+          <label for="id_image">صورة الاعلان :</label>
+            <input type="file" id="id_image" name="image" accept="image/*"  >
+        </fieldset>
+        <div class="button">
+          <button type="submit"> نشر الإعلان</button>
+      </div>
+    </div>
+    </form>
+
+  </section>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+
+<title>Notifications</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    .notification {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .notification:hover {
+        background-color: #f9f9f9;
+    }
+
+    .notification h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .notification p {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .notification .date {
+        font-size: 14px;
+        color: #999;
+        text-align: right;
+    }
+
+    
+</style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+<div class="container">
+    {% for notice in notices %}
+    <div class="notification {% if notice.ReadStatus %} read {% endif %}" onclick="markAsRead('{{ notice.id }}')" id="{{ notice.id }}">
+        <p> {{notice.Details}} </p>
+        <p class="date">{{notice.DueDate}}</p>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo';
+    background-color: #fff;
+  }
+  
+  .container {
+    max-width: 700px;
+    margin: 150px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #2d2e32;
+    
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  fieldset {
+    margin-bottom: 50px;
+    border: 1px solid #ccc;
+    padding: 50px;
+  }
+  
+  legend {
+    font-weight: bold;
+    display: flex;
+    justify-content: right;
+  }
+  
+  label {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: right;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: center;
+}
+
+.button button {
+    width: 50%;
+    border: none;
+    background-color: #3c9af1;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    display: inline-block; /* Make anchor element behave like a block */
+    text-align: center; /* Center text within anchor element */
+    text-decoration: none; /* Remove default underline */
+    padding: 10px 20px; /* Add padding to match button height */
+}
+
+.button button:hover {
+    background-color: #2d86d8;
+    color:#fff ;
+}

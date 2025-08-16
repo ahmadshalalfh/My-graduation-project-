@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarqumia Municipality | بلدية ترقوميا </title>
+  <link rel="icon" type="icon" href="{% static 'logo.png' %}">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{% static 'homepage.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+ 
+  
+</head>
+
+<body>
+    {% include 'parts/navbar.html' %}
+  
+  <section id="content-body">
+    <div class="body-part-1">
+      <div class="body-title">
+        <h1>بلدية ترقوميا</h1>
+        <p>في قلب مجتمعنا، نسعى دائماً إلى تحسين جودة حياة مواطنينا الأعزاء<br> من خلال موقعنا الإلكتروني، نقدم
+          لكم وسيلة سهلة وفعالة للتفاعل مع خدمات البلدية.</p>
+          {% if user.is_authenticated  %}
+          <a href="{% url 'logout_view' %}">تسجيل الخروج</a>
+          {% else %}
+        <a href="{% url 'login' %}">تسجيل الدخول</a>
+        <a href="{% url 'registration' %}">إنشاء حساب</a>
+        {% endif %}
+      </div>
+
+    </div>
+    <div class="body-part-2">
+      <div class="hoodie-guy-animation-class">
+        <div class="hoodie-guy"></div>
+       
+      </div>
+      <div class="background-circle" style="background-image: url('{% static "ahmad1.jpg" %}'); background-size: cover; background-position: -30px ;">
+        
+      </div>
+    </div>
+  </section>
+
+  <section id="news-announcments">
+    <div class="news-announcments-title">
+      <h3>الأخبار والإعلانات</h3>
+      <p>إكتشف فعالياتنا وابق على اطلاع دائم بآخر أخبار بلدية ترقوميا من أجل مستقبل يقوده المجتمع.</p>
+    </div>
+
+    <div class="news-announcments-cards">
+      <div class="card-1">
+        <div class="card-title">
+          <h3>إنقطاع للتيار الكهربائي</h3>
+        </div>
+        <div class="card-content">
+          <img src="logo.png" alt="">
+          <p>تعلن بلدية ترقوميا للمواطنين الكرام عن إنقطاع التيار الكهربائي في منطقة وسط البلد نظراً لقيامها بعمل صيانة
+            لمحول الكهرباء، وسيتم إعادة التيار الكهربائي فور الإنتهاء من العمل. </p>
+        </div>
+      </div>
+       {% if news %}
+      <div class="card-1">
+        <div class="card-title">
+          <h3>{{news.Title}}</h3>
+        </div>
+        <div class="card-content">
+          <img src="data:image/png;base64,{{ news.Newsimage }}"  alt="صورة الخبر">
+          <p>{{ news.Content}}</p>
+        </div>
+      </div>
+      {% endif %}
+       {% if announcements %}
+      <div class="card-1">
+        <div class="card-title">
+          <h3>{{announcements.Title}}</h3>
+        </div>
+        <div class="card-content">
+          <img src="data:image/png;base64,{{ announcements.Announcementsimage }}"  alt="صورة الاعلان">
+          <p> {{announcements.Content}} </p> 
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    <div class="news-announcments-link">
+      <a href="{% url 'news_and_announcements' %}">
+        <h3>مشاهدة جميع الأخبار ولإعلانات</h3>
+      </a>
+    </div>
+
+
+  </section>
+  <section id="search-box">
+    <div class="search-box-title">
+      <h3>الأخبار والإعلانات</h3>
+      <p>استكشف المزيد بسهولة وسرعة! استخدم صندوق البحث أعلاه للوصول إلى ما تبحث عنه في الموقع.</p>
+    </div>
+      <div class="search-box-card">
+      <input class="search" type="search" placeholder="البحث عن ...">
+    </div>
+
+  </section>
+  <section id="footer">
+    <div class="footer-content">
+      <div class="footer-content-title">
+        <h3>تواصل معنا</h3>
+      </div>
+      <div class="location">
+        <h6>فلسطين، الخليل، ترقوميا، شارع الصالات</h6>
+        <i class="fa-solid fa-location-dot"></i>
+      </div>
+      <p>tarqumiamunicipality@gmail.com</p>
+      <div class="social-icons">
+        <a href="mailto:tanmoytssaha@gmail.com" target="_blank">
+          <i class="fa-regular fa-envelope"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tanmoy-saha-7724b5195/" target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tanmoy-saha-7724b5195/" target="_blank">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tanmoy-saha-7724b5195/" target="_blank">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+      </div>
+
+    </div>
+
+
+
+  </section>
+  <script src="homepage.js"></script>
+  
+ </body>
+
+</html>

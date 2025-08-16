@@ -1,0 +1,257 @@
+<section id="header">
+  <div class="navbar-title">
+    <h3 class="title-first-name">
+      Tarqumia
+    </h3>
+    <h3 class="title-last-name">
+      Municiplity
+    </h3>
+  </div>
+  <div>
+    <ul class="navbar-menu">
+      
+      <li><a href="#">إتصل بنا</a></li>
+      <li><a href="{% url 'about' %}">عن بلدية ترقوميا</a></li>
+      
+      {% if user.is_employee == 0 and user.is_admin == 0 %}
+      <li><a href="{% url 'bills' %}"> الفواتير</a></li>
+      <li><a href="{% url 'documents' %}"> الوثائق الرسمية</a></li>
+      <li><a href="{% url 'subscripions' %}">  الإشتراكات</a></li>
+
+      {% endif %}
+
+{% if user.is_employee and employee.department.DepartmentID != 4 %}
+    <li><a href="{% url 'Updating_deleting_citizen' %}">المواطنين  </a></li> 
+    <li><a href="{% url 'complaints_tabel' %}">عرض الشكاوى </a></li>
+    <li><a href="{% url 'requests_table' %}">عرض جميع الطلبات</a></li>
+    
+    
+    {% endif %}
+
+{% if user.is_employee and employee.department.DepartmentID == 4 %}
+<li><a href="{% url 'Updating_deleting_citizen' %}">المواطنين  </a></li> 
+    <li><a href="{% url 'payments' %}">اضافة دفعات </a></li>
+    <li><a href="{% url 'requests_table' %}">عرض جميع الطلبات</a></li>
+   
+   
+{% endif %}
+      {% if not user.is_authenticated or user.is_employee == 0 and user.is_admin == 0   %}
+      <li><a href="{% url 'services' %}">عرض جميع الخدمات</a></li>
+      {% endif %}
+      {% if user.is_admin == 1 %}
+      <li><a href=" {% url 'news_announcements' %}  ">نشر الأخبار والإعلانات</a></li>
+      <li><a href=" {% url 'accounts_management' %} ">إدارة حسابات المستخدمين</a>
+      </li>
+      {% endif %}
+      <li><a href="{% url 'homepage' %}">الصفحة الرئيسية</a></li>
+      
+    </ul>
+  </div>
+  <div class="corner">
+  <ul class="social-media">
+    {% if user.is_authenticated %}
+    <li>
+      <a href="{% url 'Notice' %}">الإشعارات</a>
+      <i class="fa-solid fa-bell"></i>
+    </li>
+    <li>
+      <a href="{% url 'messages' %}">الرسائل</a>
+      <i class="fa-regular fa-envelope"></i>
+    </li>
+    {% endif %}
+    <li class="profile">
+      <a href="#" class="profile-icon"><i class="fa-solid fa-user"></i></a>
+      <div class="dropdown">
+        {% if user.is_authenticated %}
+        <p>أهلا وسهلاً بك يا {{user.username}}</p>
+        <a href="{% url 'updating_citizen' user.userID%}"> إدارة الحساب الخاص بي</a>
+        <a href="{% url 'logout_view' %}">تسجيل الخروج</a>
+        {% else %}
+        <a href="{% url 'login' %}">تسجيل الدخول</a>
+        <a href="{% url 'registration' %}">إنشاء حساب</a>
+        {% endif %}
+      </div>
+</div>
+</li>
+</ul>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const profileIcon = document.querySelector('.profile-icon');
+    const dropdown = document.querySelector('.dropdown');
+
+    profileIcon.addEventListener('click', (e) => {
+      e.preventDefault();
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!profileIcon.contains(e.target)) {
+        dropdown.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+<style>
+  #header {
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fefefe;
+    border: 1px #2d2e32;
+    box-shadow: 0 0 10px 1px #00000040;
+    backdrop-filter: blur(15px);
+    color: #2d2e32;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .navbar-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .title-first-name {
+    padding: 0 7.5px;
+    font-weight: 600;
+    color: #2d2e32;
+    font-family: "Raleway", sans-serif;
+    font-size: 24px;
+  }
+
+  .title-last-name {
+    font-size: 24px;
+    font-weight: 400;
+    color: #3c9af1;
+    font-family: "Raleway", sans-serif;
+  }
+
+  .navbar-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar-menu li {
+    list-style: none;
+    padding: 0 12px;
+    position: relative;
+  }
+
+  .navbar-menu .active {
+    color: #3c9af1;
+    font-weight: 900;
+  }
+
+  .navbar-menu li a {
+    color: #2d2e32;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s ease;
+  }
+
+  .navbar-menu li a:hover {
+    color: #3c9af1;
+    font-weight: 900;
+  }
+
+
+  .social-media {
+    display: flex;
+    align-items: center;
+  }
+
+  .social-media li {
+    display: flex;
+    padding: 0 16px;
+    align-items: center;
+    list-style: none;
+  }
+
+  .social-media li i {
+    font-size: 14px;
+    transition: 0.3s ease;
+  }
+
+  .social-media li a {
+    color: #2d2e32;
+    text-decoration: none;
+    padding: 0 5px;
+    font-size: 12px;
+    transition: 0.3s ease;
+  }
+
+
+
+  .social-media li:hover a {
+    font-weight: 800;
+  }
+
+  .profile {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .profile a {
+    text-decoration: none;
+  }
+
+  .profile .dropdown {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 40%;
+    transform: translateX(-50%);
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    z-index: 1;
+    min-width: 190px;
+  }
+
+  .profile .dropdown a {
+    color: #2d2e32;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile .dropdown p {
+    color: #3c9af1;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile .dropdown a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .profile .profile-icon {
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 0px;
+  }
+</style>
+</div>
+
+
+
+
+ 
+</section>
+
+
+

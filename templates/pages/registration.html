@@ -1,0 +1,78 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب جديد</title>
+  <link rel="stylesheet" href="{%static 'registration.css'%}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+
+  <style>
+    .button {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .button button {
+        width: 50%;
+        border: none;
+        background-color: #3c9af1;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 15px;
+        display: inline-block; /* Make anchor element behave like a block */
+        text-align: center; /* Center text within anchor element */
+        text-decoration: none; /* Remove default underline */
+        padding: 10px 20px; /* Add padding to match button height */
+    }
+    
+    .button button:hover {
+        background-color: #2d86d8;
+        color:#fff ;
+    }
+    
+    
+      </style>
+
+</head>
+
+<body>
+  <div class="container" style="margin-top: 20px;">
+    <h2>إنشاء حساب جديد</h2>
+    <form action="#" method="post">
+      {% csrf_token %}
+      {% for message in messages %}
+      <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+          <strong>{% if message.tags == 'success' %}Success!{% elif message.tags == 'error' %}Error!{% endif %}</strong> {{ message }}
+      </div>
+      {% endfor %}
+      <fieldset>
+        <legend>تفاصيل شخصية</legend>
+        <label for="ID"> رقم الهوية</label>
+        <input type="text" id="ID" name="ID" required placeholder="أدخل رقم الهوية الخاص بك">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" name="email" required placeholder="أدخل البريد الإلكتروني الخاص بك">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" required placeholder="أدخل كلمة المرور الخاص بك">
+        <label for="password">تأكيد كلمة المرور</label>
+        <input type="password" id="password" name="rpassword" required placeholder="أدخل كلمة المرور الخاص بك">
+        <label for="ID"> رقم الهاتف</label>
+        <input type="text" id="ID" name="phon" required placeholder="أدخل رقم الهاتف الخاص بك">
+        <label for="ID"> العنوان</label>
+        <input type="text" id="ID" name="address" required placeholder="أدخل العنوان الخاص بك">
+      </fieldset>
+
+      <div class="button">
+        <button type="submit" > إنشاء حساب </button>
+    </div>
+    </form>
+  </div>
+
+</body>
+
+</html>

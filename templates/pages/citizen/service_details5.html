@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarqumia Municipality | بلدية ترقوميا </title>
+    <link rel="icon" type="icon" href="logo.png">
+    <script src="https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'servicedetails.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    {% include 'parts/navbar.html' %}
+    <section id="content-body">
+        <div class="head-container">
+            <div class="marker">
+                <span><a href="#">الصفحة الرئيسية</a></span>
+                <span><i class="fa-solid fa-chevron-left"></i></span>
+                <span><a href="#">عرض جميع الخدمات</a></span>
+                <span><i class="fa-solid fa-chevron-left"></i></span>
+                <span><a href="#">تفاصيل الخدمة</a></span>
+            </div>
+        </div>
+
+        <div class="services-title">
+            {% if num1 == 1 %}
+            <h2>طلب شهادة إثبات ملكية   </h2>
+            <p>تمكّنك هذه الخدمة من تصديق شهادة موثوقة ونافذة الصلاحيّة وصادرة عن جهة تقييم مطابقة مُعتمدة لمواد البناء
+                بشكل أساسي وغيرها من المواد، حيث تشمل هذه الخدمة المنتجات غير الإلزامية التي لا يغطيها أي تشريع أو
+                مُنتجات إلزامية لم يتم تطوير وإعداد متطلبات منح شهادات مطابقة لها.</p>
+            {% elif num1 == 2 %}
+            <h2>  ترسيم حدود لقطع الأراضي </h2>
+            <p>تمكّنك هذه الخدمة من تصديق شهادة موثوقة ونافذة الصلاحيّة وصادرة عن جهة تقييم مطابقة مُعتمدة لمواد البناء
+                بشكل أساسي وغيرها من المواد، حيث تشمل هذه الخدمة المنتجات غير الإلزامية التي لا يغطيها أي تشريع أو
+                مُنتجات إلزامية لم يتم تطوير وإعداد متطلبات منح شهادات مطابقة لها.</p>
+            {% elif num1 == 3 %}
+            <h2>   طلب رخصة بناء جديد </h2>
+            <p>تمكّنك هذه الخدمة من تصديق شهادة موثوقة ونافذة الصلاحيّة وصادرة عن جهة تقييم مطابقة مُعتمدة لمواد البناء
+                بشكل أساسي وغيرها من المواد، حيث تشمل هذه الخدمة المنتجات غير الإلزامية التي لا يغطيها أي تشريع أو
+                مُنتجات إلزامية لم يتم تطوير وإعداد متطلبات منح شهادات مطابقة لها.</p>
+            {% endif %}
+        </div>
+
+        <div class="page-container">
+            <div class="content" id="content">
+            </div>
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="#" data-target="steps" data-service="{{ num1 }}">إجراءات وخطوات الخدمة</a>
+                        <i class="fa-solid fa-square-plus"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="documents" data-service="{{ num1 }}">الوثائق المطلوبة</a>
+                        <i class="fa-regular fa-file-lines"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="fees" data-service="{{ num1 }}">رسوم الخدمة</a>
+                        <i class="fa-solid fa-circle-dollar-to-slot"></i>
+                    </li>
+                    <li>
+                        <a href="#" data-target="time" data-service="{{ num1 }}">الوقت اللازم لانجاز الخدمة</a>
+                        <i class="fa-regular fa-clock"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button">
+            <a href="{% url 'engineering_department_requests' num1 %}">تقديم الطلب</a>
+        </div>
+    </section>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // محتويات مختلفة لكل خدمة
+            const contentData = {
+                1: {
+                    steps: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                <ul>
+                    <li>استلام الطلب</li>
+                    <li>دفع الرسوم</li>
+                    <li>تعبئة بيانات قطعة الأرض</li>
+                    <li>طباعة وتجهيز الشهادة</li>
+                    <li>توقيع الشهادة</li>
+                    <li>أرشفة الشهادة</li>
+                    <li>تسليم الشهادة للمواطن</li>
+                </ul>
+            </p>
+        `,
+                    documents: '<h3>الوثائق المطلوبة</h3><p><ul><li> اثبات شخصية</li><li>   سند ملكية </li></p>',
+                    fees: '<h3>رسوم الخدمة</h3><p> "20" شيكل فقط لا غير </p>',
+                    time: '<h3>الوقت اللازم لإنجاز الخدمة</h3><p>  يوم كحد أقصى 1 </p>'
+                },
+                2: {
+                    steps: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                    <ul>
+                        <li>استلام الطلب</li>
+                        <li>دفع رسوم الطلب</li>
+                        <li>دراسة أوراق الملكية ومخطط المساحة</li>
+                        <li>عمل كشف ميداني وكتابة تقرير وعمل مخطط مساحة لترسيم القطعة</li>
+                        <li>دراسة المخطط واتخاذ القرار</li>
+                        <li>المصادقة على مخطط المساحة</li>
+                        <li>ترسيم الحدود على مخطط المساحة في حال كان الطلب خارج حدود البلدة القديمة</li>
+                        <li>تسليم المخطط للمواطن</li>
+                        <li>ارشفة الطلب</li>
+                    </ul>
+
+                
+            </p>
+        `,           documents: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                 <ul>
+                    <li>أوراق ملكية</li>
+                    <li>مخطط مساحة</li>
+                    <li>إثبات شخصية</li>
+                </ul>
+            </p>
+        `,
+                    fees: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                100 شيكل فقط لا غير
+            </p>`,
+                    time: '<h3>الوقت اللازم لإنجاز الخدمة</h3><p>9 يوم كحد أقصى  </p>'
+                },
+                3: {
+                    steps: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                <ul>
+                    <ul>
+    <li>ستالم الطلب</li>
+    <li>دراسة مخططات المساحة واوراق الملكية والتأكد من عدم وجود نزاع على الملكية</li>
+    <li>تحويل الطلب للمحاسبة لدفع رسوم فتح ملف الترخيص</li>
+    <li>دفع الرسوم</li>
+    <li>تسليم المواطن الملف لمصادقتها من الوزارات المعنية</li>
+    <li>انتظار إرجاع المعاملة للبلدية بعد تصديقها من الوزارات</li>
+    <li>استلام الوثائق بعد تصديقها من الوزارات ذات العلاقة</li>
+    <li>دراسة الوثائق بعد تصديقها ووضع المعلومات التنظيمية على مخطط المساحة</li>
+    <li>تسليم المواطن المخططات الهندسية الموقعة بعد وضع المعلومات التنظيمية عليها من اجل اعداد مخطط هندسي للبناء معتمد من نقابة المهندسين ووزارة الصحة والبيئة والدفاع المدني</li>
+    <li>انتظار إرجاع مخططات بعد مصادقتها من الوزارات المعنية</li>
+    <li>استلام الملف من المواطن</li>
+    <li>مراجعة المخططات وفحص مخططات الترسيم</li>
+    <li>انتظار انعقاد اللجنة التنظيمية</li>
+    <li>دراسة الملف من قبل اللجنة التنظيمية واصدار قرار بالموافقة او الرفض</li>
+    <li>احتساب الرسوم في حالة الموافقة</li>
+    <li>دفع الرسوم</li>
+    <li>اصدار الرخصة وتوقيعها من مهندس التنظيم</li>
+    <li>تصديق الرخصة من رئيس اللجنة المحلية للتنظيم والبناء ودائرة الهندسة</li>
+    <li>تسليم نسخة للمواطن</li>
+    <li>ارشفة الطلب</li>
+</ul>
+
+                </ul>
+            </p>
+        `,           documents: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                <ul>
+                    <li> مساحة مصدق من مساح اليزيدعن 6 شهورومصادق من االثار ودائرة امالك الدولة  </li>
+                    <li>     	 اوراق الملكية بموجب وكالة دورية او اتفاقية بيع شراء او اخراج قيد  </li>
+                    <li>  تعهدعدلي من المحكمة لحفظ حق الشركاء والغائبين  </li>
+                    <li>      مخطط هندسي مصدق من نقابة المهندسين ووزارة الصحة ووزارة البيئه والدفاع المدني .</li>
+                    <li>   صورة الهوية</li>
+                    
+                </ul>
+            </p>
+        `,
+                    fees: `
+            <h3>إجراءات وخطوات الخدمة</h3>
+            <p>
+                <ul>
+                    <li>41.6 دينار أردني + 11 شيكل ثمن نسخة الملف لمبنى السكن العادي</li>
+                    <li>24 دينار أردني + 11 شيكل ثمن نسخة الملف للسكن الزراعي</li>
+                    <li>68 دينار أردني + 11 شيكل ثمن نسخة الملف التجاري والصناعي</li>
+                    <li>24 دينار أردني + 11 شيكل ثمن نسخة الملف للمباني القديمة</li>
+                    <li>حسب المساحة وتقاس بالمتر المربع وحسب تصنيف المنطقة</li>
+                    <li>رسوم فتح ملف وتختلف باختلاف تصنيف الموقع</li>
+                                    
+                </ul>
+            </p>`,
+                    time: '<h3>الوقت اللازم لإنجاز الخدمة</h3><p> 24 يوم كحد أقصى  </p>'
+                },
+            };
+
+            // Function to handle link click
+            function handleLinkClick(event) {
+                event.preventDefault();
+                const content = document.getElementById('content');
+                const target = event.target.getAttribute('data-target');
+                const service = event.target.getAttribute('data-service');
+
+                // Update content based on the link clicked and service type
+                content.innerHTML = contentData[service][target];
+            }
+
+            // Attach click event listener to all sidebar links
+            const sidebarLinks = document.querySelectorAll('.sidebar ul li a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', handleLinkClick);
+            });
+        });
+    </script>
+</body>
+
+</html>

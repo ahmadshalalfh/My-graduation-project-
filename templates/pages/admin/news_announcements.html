@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarqumia Municipality</title>
+  <link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{%static 'news_announcements.css'%}">
+  <link rel="stylesheet" href="{%static 'navbar.css'%}">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+</head>
+
+<body>
+
+  
+    {% include 'parts/navbar.html'%}
+ 
+  <section id="content-body">
+    <div class="news-announcments-title">
+      <h2>نشر الأخبار والإعلانات</h2>
+      <p> نشر الأخبار والإعلانات لجعل المواطنين على إطلاع دائم بآخر أخبار بلدية ترقوميا والإعلانات المُتعلقة بالبلدة.
+      </p>
+    </div>
+
+    <div class="publish-links">
+        <a href="{% url 'news' %}">نشر خبر جديد</a>
+        <i class="fa-regular fa-newspaper"  style="margin-right: 20px;"></i>
+        <a href="{% url 'announcements' %}">نشر إعلان جديد</a>
+        <i class="fa-solid fa-bullhorn"></i>
+    </div>
+
+  </section>
+</body>
+
+</html>

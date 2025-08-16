@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+
+<title>  الإشتراكات </title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2;
+    text-align: center;
+  }
+  tr:hover {
+    background-color: #f9f9f9;
+  }
+  .invoice-img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+   img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    /* تحديد عرض الصورة */
+    width: 300px; /* يمكنك تعديل القيمة حسب الحاجة */
+    height: auto; /* للحفاظ على نسبة العرض إلى الارتفاع */
+}
+</style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+<div class="container">
+  <h1>الإشتراكات </h1>
+  <table>
+    <thead>
+      <tr>
+        
+        <th>نوع الاشتراك</th>
+        <th>القسم</th>
+        <th>صورة الاشتراك </th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for subscription in subscriptionall %}
+      <tr>
+        <td>{{ subscription.Name }}</td>
+        <td>{{ subscription.DepartmentID.DepartmentName }}</td>
+        
+        <td>
+            
+            <a href="data:image/png;base64,{{ subscription.Subscription_photo }}" download="صورة_الوثيقة.png">
+                <img src="data:image/png;base64,{{ subscription.Subscription_photo }}" alt=" صورة_الوثيقة">
+               </a>
+            
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

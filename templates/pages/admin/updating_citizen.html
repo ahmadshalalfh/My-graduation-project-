@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'homepage.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+  <link rel="icon" type="icon" href="logo.png">
+    <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+    </script>
+  <title>نموذج تحديث وحذف</title>
+  <style>
+    
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff; /* لون خلفية النموذج */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+      margin-top: 10px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333; /* لون النص */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input[type="submit"]{
+      background-color: #4CAF50; /* لون زر التحديث */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+      margin-right: 10px;
+      transition: background-color 0.3s; /* تحويل لون الزر بشكل سلس */
+    }
+
+   
+    
+    input[type="submit"]:hover {
+      background-color: #45a049; /* تغيير لون الزر عند التحويل */
+    }
+
+ 
+  </style>
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+
+  <form action="#" method="post">
+    {% csrf_token %}
+    <label for="id_number">رقم الهوية:</label>
+    <input type="text" id="id_number" name="id_number" value="{{user1.userID}}" readonly>
+
+    <label for="name">الاسم:</label>
+    <input type="text" id="name" name="name" value="{{user1.username}}" required>
+
+    <label for="email">البريد الالكتروني:</label>
+    <input type="text" id="email" name="email" value="{{user1.email}}" required>
+
+    <label for="address">العنوان:</label>
+    <input type="text" id="address" name="address" value="{{user1.Address}}" required>
+
+    <label for="phone">رقم الهاتف:</label>
+    <input type="text" id="phone" name="phone" value="{{user1.Phone}}" required>
+
+
+    <label for="password">كلمة المرور الجديدة :</label>
+    <input type="password" id="password" name="password" required>
+
+    <input type="submit" value="تحديث">
+    
+  </form>
+
+</body>
+</html>

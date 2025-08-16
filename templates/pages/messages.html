@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarqumia Municipality | بلدية ترقوميا </title>
+  <link rel="icon" type="icon" href="{% static 'logo.png' %}">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{% static 'messages.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+
+  <style>
+    .button a {
+      width: fit-content;
+      border: none;
+      background-color: #3c9af1;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 15px;
+      display: inline-block;
+      /* Make anchor element behave like a block */
+      text-align: center;
+      /* Center text within anchor element */
+      text-decoration: none;
+      /* Remove default underline */
+      padding: 10px 20px;
+      /* Add padding to match button height */
+    }
+
+    .button a:hover {
+      background-color: #2d86d8;
+      color: #fff;
+    }
+
+    .button i:hover {
+      background-color: #2d86d8;
+      color: #fff;
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+    }
+
+    .notification {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .notification:hover {
+        background-color: #f9f9f9;
+    }
+
+    .notification h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .notification p {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .notification .date {
+        font-size: 14px;
+        color: #999;
+        text-align: right;
+    }
+
+    
+  </style>
+</head>
+
+
+<body>
+
+  
+    {% include 'parts/navbar.html'%}
+ 
+  <section id="content-body">
+    <div class="news-announcments-title">
+      <h2>جميع الرسائل</h2>
+      
+    </div>
+    <div class="container">
+      {% for my_message in my_messages %}
+      <div class="notification {% if notice.ReadStatus %} read {% endif %}" onclick="markAsRead('{{ notice.id }}')" id="{{ notice.id }}">
+          <p> {{my_message.Content}} </p>
+          <p class="date">{{my_message.SendDate}}</p>
+      </div>
+      {% endfor %}
+  </div>
+    <div class="container">
+      
+      <div class="button">
+        <a href="{% url 'create_message' %}">إنشاء رسالة <i class="fa-solid fa-plus" style="margin-left: 20px;"></i></a>
+
+      </div>
+    </div>
+  </section>
+
+
+</body>
+
+</html>

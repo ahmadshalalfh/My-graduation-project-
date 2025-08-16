@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة دفعة</title>
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+    <link rel="icon" type="icon" href="logo.png">
+    <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        .form-group input[type="submit"] {
+            background-color: #305da0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #4577a0;
+        }
+    </style>
+</head>
+<body>
+    {% include 'parts/navbar.html'%}
+    <div class="container">
+        <h2>إضافة دفعة</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+            <strong>{% if message.tags == 'success' %}Success!{% elif message.tags == 'error' %}Error!{% endif %}</strong> {{ message }}
+        </div>
+        {% endfor %}
+            <div class="form-group">
+                <label for="bill_id">رقم الفاتورة:</label>
+                <input type="text" id="bill_id" name="bill_id"  required>
+            </div>
+            <div class="form-group">
+                <label for="amount_paid">المبلغ المدفوع:</label>
+                <input type="number" id="amount_paid" name="amount_paid" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="payment_date">تاريخ الدفع:</label>
+                <input type="text" id="payment_date" name="payment_date" value="{{date}}" readonly>
+            </div>
+            <div class="form-group" style="text-align: right;">
+                <input type="submit" value="إضافة دفعة">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

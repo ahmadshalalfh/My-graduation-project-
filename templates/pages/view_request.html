@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الطلب</title>
+    <link rel="stylesheet" href="{% static 'homepage.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+<link rel="icon" type="icon" href="logo.png">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    direction: rtl; /* تحديد الاتجاه إلى اليمين */
+}
+
+.details {
+    margin-top: 20px;
+}
+
+.details p {
+    margin-bottom: 10px;
+    text-align: right; 
+}
+
+.details img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    /* تحديد عرض الصورة */
+    width: 300px; /* يمكنك تعديل القيمة حسب الحاجة */
+    height: auto; /* للحفاظ على نسبة العرض إلى الارتفاع */
+}
+
+.action-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-links a {
+    margin-right: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.action-links a.accept {
+    background-color: #007bff;
+}
+
+.action-links a.reject {
+    background-color: #dc3545;
+}
+
+.action-links a:hover {
+    background-color: #0056b3;
+}
+
+.action-links a.reject:hover {
+    background-color: #c82333;
+}
+
+
+</style>
+
+</head>
+<body>
+    {% include 'parts/navbar.html' %}
+
+    {% if complaints %}
+     <div class="container">
+        <h1>تفاصيل الشكوى</h1>
+        <div class="details">
+            {% for request in complaints %}
+            <p><strong>رقم الطلب:</strong> {{request.RequestID}}</p>
+            <p><strong>اسم المواطن:</strong> {{request.CitizenID}}</p>
+            <p><strong>رقم المواطن:</strong> {{request.CitizenID.userID}}</p>
+            <p><strong>الشكوى:</strong> {{request.Details}}</p>
+            <p><strong>التاريخ:</strong> {{request.RequestDate}} </p>
+            {% if request.Supportive_Photo %}
+            <a href="data:image/png;base64,{{ request.Supportive_Photo }}" download=".png">
+                <img src="data:image/png;base64,{{ request.Supportive_Photo }}" alt="صورة ">
+             </a>
+             {% endif %}
+             <div class="action-links">
+             <a href="{% url 'complaints_Done' request.RequestID %}"  class="accept"> تم </a>
+             </div>
+             {% endfor %}
+
+        </div>
+     </div>
+
+    {% else %}
+    <div class="container">
+        <h1>تفاصيل الطلب</h1>
+        <div class="details">
+            {% for request in requestobj %}
+            <p><strong>رقم الطلب:</strong> {{request.RequestID}}</p>
+            <p><strong>اسم المواطن:</strong> {{request.CitizenID}}</p>
+            <p><strong>رقم المواطن:</strong> {{request.CitizenID.userID}}</p>
+            <p><strong>ملاحظة:</strong> {{request.Details}}</p>
+            <p><strong>التاريخ:</strong> {{request.RequestDate}} </p>
+            <a href="data:image/png;base64,{{ request.ID_Photo }}" download="صورة_الهوية.png">
+                <img src="data:image/png;base64,{{ request.ID_Photo }}" alt="صورة الهوية">
+            </a>
+            {% if request.DepartmentID.DepartmentID == 1 %}
+            {% if request.BuildingPermit_Photo %}
+            <a href="data:image/png;base64,{{ request.BuildingPermit_Photo }}" download=".png">
+                <img src="data:image/png;base64,{{ request.BuildingPermit_Photo }}" alt="صورة ">
+             </a>
+             {% endif %}
+             {% if request.Oldsubscription_Photo %}
+
+             <a href="data:image/png;base64,{{ request.Oldsubscription_Photo }}" download=".png">
+                <img src="data:image/png;base64,{{ request.Oldsubscription_Photo }}" alt="صورة ">
+             </a>
+             {% endif %}
+
+             {% elif request.DepartmentID.DepartmentID == 2 %}
+             {% if request.BuildingPermit_Photo %}
+             <a href="data:image/png;base64,{{ request.BuildingPermit_Photo }}" download=".png">
+                <img src="data:image/png;base64,{{ request.BuildingPermit_Photo }}" alt="صورة ">
+             </a>
+             {% endif %}
+             {% if request.Oldsubscription_Photo %}
+             <a href="data:image/png;base64,{{ request.Oldsubscription_Photo }}" download=".png">
+                <img src="data:image/png;base64,{{ request.Oldsubscription_Photo }}" alt="صورة ">
+             </a>
+             {% endif %}
+
+ 
+             {% elif request.DepartmentID.DepartmentID == 3 %}
+             {% if request.Bill_Photo %}
+              <a href="data:image/png;base64,{{ request.Bill_Photo }}" download="صورة_الهوية.png">
+                <img src="data:image/png;base64,{{ request.Bill_Photo }}" alt="صورالهوية">
+             </a>
+             {% endif %}
+             {% if request.Rent_Photo %}
+             <a href="data:image/png;base64,{{ request.Rent_Photo }}" download="صورة_الهوية.png">
+                <img src="data:image/png;base64,{{ request.Rent_Photo }}" alt="صو الهوية">
+             </a>
+             {% endif %}
+
+             {% elif request.DepartmentID.DepartmentID == 5 %}
+              {% if request.Ownership_Photo %}
+               <a href="data:image/png;base64,{{ request.Ownership_Photo }}" download="صورة_الهوية.png">
+               <img src="data:image/png;base64,{{ request.Ownership_Photo }}" alt="صورالهوية">
+               </a>
+              {% endif %}
+             {% if request.SpacePlan_Photo %}
+              <a href="data:image/png;base64,{{ request.SpacePlan_Photo }}" download="صورة_الهوية.png">
+               <img src="data:image/png;base64,{{ request.SpacePlan_Photo }}" alt="صو الهوية">
+              </a>
+              {% endif %}
+              {% if request.CertifiedEngineeringPlan_Photo %}
+              <a href="data:image/png;base64,{{ request.Ownership_Photo }}" download="صورة_الهوية.png">
+               <img src="data:image/png;base64,{{ request.Ownership_Photo }}" alt="صو الهوية">
+              </a>
+              {% endif %}
+              {% if request.Geometricscheme_Photo %}
+              <a href="data:image/png;base64,{{ request.Geometricscheme_Photo }}" download="صورة_الهوية.png">
+               <img src="data:image/png;base64,{{ request.Geometricscheme_Photo }}" alt="صو الهوية">
+              </a>
+              {% endif %}
+              {% if request.CourtAffidavit_Photo %}
+              <a href="data:image/png;base64,{{ request.CourtAffidavit_Photo }}" download="صورة_الهوية.png">
+               <img src="data:image/png;base64,{{ request.CourtAffidavit_Photo }}" alt="صو الهوية">
+              </a>
+              {% endif %}
+     
+             {% endif %}
+
+           
+        </div>
+        <div class="action-links">
+            {% if request.Status == 'PA' %}
+            <a href="{% url 'Subscription' request.RequestID %}"  class="accept">  إنشاء وثيقة</a>
+            <a href="{% url 'creat_notice' request.RequestID %}"  class="accept"> تنفيذ الطلب</a>
+
+            {% else %}
+            <a href="{% url 'accept_request' request.RequestID  %}" class="accept">قبول الطلب</a>
+            <a href="{% url 'delete_request' request.RequestID  %}" class="reject">رفض الطلب</a>
+            {% endif %}
+             {% endfor %}
+             
+        </div>
+       
+    </div>
+    {% endif %}
+</body>
+</html>

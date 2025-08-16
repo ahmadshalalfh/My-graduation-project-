@@ -1,0 +1,97 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarqumia Municipality | بلدية ترقوميا </title>
+  <link rel="icon" type="icon" href="{% static 'logo.png' %}">
+  <script src=" https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="{%static 'news_announcements.css'%}">
+  <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    width: 99%;
+    max-width: 100%;
+    margin: 50px auto;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    word-wrap: break-word;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+</head>
+
+<body>
+
+    {% include 'parts/navbar.html'%}
+  
+  <section id="content-body">
+    <div class="container">
+      <h1>إدارة حسابات الموظفين </h1>
+      <table>
+        <thead>
+          <tr>
+            <th>رقم الهوية</th>
+            <th>الاسم</th>
+            <th>البريد الالكتروني</th>
+            <th>العنوان</th>
+            <th>رقم الهاتف</th>
+            <th>القسم </th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{user.userID}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.Address}}</td>
+            <td>{{user.Phone}}</td>
+            <td>{{user.department.DepartmentName}}</td>
+
+            <td style="text-align: center; "> <a href="{% url 'delete_employee' user.userID %}">حذف</a> </td>
+            <td style="text-align: center;"> <a href="{% url 'updating_employee' user.userID %}">تحديث</a> </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+
+</html>
